@@ -10,13 +10,17 @@ html{
  scroll-behavior:smooth;
 }
 
-/* 🌸 BACKGROUND */
+/* 🌸 BODY */
 body{
  background:linear-gradient(-45deg,#050507,#1a0d1f,#0d0d14,#1a1a2e);
  background-size:400% 400%;
- animation:bgMove 10s ease infinite;
+ animation:bgMove 12s ease infinite;
  color:#fff;
- overflow:hidden;
+
+ overflow-x:hidden;
+ overflow-y:auto;
+
+ min-height:100vh;
 }
 
 @keyframes bgMove{
@@ -25,7 +29,7 @@ body{
  100%{background-position:0% 50%}
 }
 
-/* 🌸 NAVBAR */
+/* 🌸 NAV */
 .nav{
  position:fixed;
  top:0;
@@ -39,67 +43,6 @@ body{
  z-index:100;
 }
 
-.logo{
- font-size:22px;
- font-weight:600;
- color:#ff4fa3;
-}
-
-.nav-links a{
- margin:0 10px;
- color:#ccc;
- text-decoration:none;
- transition:0.3s;
-}
-
-.nav-links a:hover{
- color:#ff4fa3;
-}
-
-/* 🌸 MENU */
-.menu{
- position:relative;
- font-size:22px;
- cursor:pointer;
-}
-
-.dropdown{
- position:absolute;
- right:0;
- top:35px;
- background:rgba(0,0,0,0.7);
- backdrop-filter:blur(10px);
- border-radius:12px;
- padding:10px;
- min-width:160px;
- display:flex;
- flex-direction:column;
-
- opacity:0;
- transform:translateY(-10px);
- pointer-events:none;
- transition:0.3s;
-}
-
-.dropdown.active{
- opacity:1;
- transform:translateY(0);
- pointer-events:auto;
-}
-
-.dropdown a{
- color:#ccc;
- text-decoration:none;
- padding:10px;
- border-radius:8px;
- transition:0.3s;
-}
-
-.dropdown a:hover{
- background:rgba(255,79,163,0.2);
- color:#ff4fa3;
-}
-
 /* 🌸 HERO */
 .hero{
  height:100vh;
@@ -110,32 +53,24 @@ body{
  text-align:center;
 }
 
-.hero img{
- width:140px;
- border-radius:50%;
- border:3px solid #ff4fa3;
- box-shadow:0 0 40px #ff4fa3,0 0 80px #ff4fa3;
- margin-bottom:20px;
- transition:0.4s;
+/* 🌸 SECTION */
+.section{
+ padding:100px 20px;
+ max-width:900px;
+ margin:auto;
+
+ opacity:0;
+ transform:translateY(40px);
+ transition:all 0.8s ease;
 }
 
-.hero img:hover{
- transform:scale(1.1);
+/* 🌸 SCROLL REVEAL */
+.section.show{
+ opacity:1;
+ transform:translateY(0);
 }
 
-.hero h1{
- font-size:55px;
- background:linear-gradient(45deg,#ff4fa3,#a855f7);
- -webkit-background-clip:text;
- color:transparent;
-}
-
-.hero p{
- margin:10px 0;
- color:#ccc;
-}
-
-/* 🌸 BUTTONS */
+/* 🌸 BUTTON */
 .btn{
  padding:12px 25px;
  border-radius:30px;
@@ -150,30 +85,9 @@ body{
  color:white;
 }
 
-.secondary{
- background:transparent;
- border:1px solid #555;
- color:#ccc;
-}
-
 .primary:hover{
+ transform:scale(1.05);
  box-shadow:0 0 20px #ff4fa3;
- transform:scale(1.05);
-}
-
-.secondary:hover{
- border-color:#ff4fa3;
- color:#ff4fa3;
- transform:scale(1.05);
-}
-
-/* 🌸 STARS */
-.star{
- position:absolute;
- width:2px;
- height:2px;
- background:white;
- opacity:0.6;
 }
 
 /* 🌸 PETALS */
@@ -193,9 +107,16 @@ body{
  100%{transform:translateY(110vh)}
 }
 
-/* 📱 MOBILE */
+/* 🌸 STARS */
+.star{
+ position:absolute;
+ width:2px;
+ height:2px;
+ background:white;
+ opacity:0.6;
+}
+
+/* MOBILE */
 @media(max-width:600px){
- .hero h1{font-size:40px;}
- .hero img{width:100px;}
- .nav-links{display:none;}
+ .hero{height:80vh}
 }
