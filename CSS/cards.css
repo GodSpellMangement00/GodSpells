@@ -1,1 +1,69 @@
 
+.card{
+ margin:20px auto;
+ padding:20px;
+ border-radius:20px;
+ background:rgba(255,255,255,0.03);
+ backdrop-filter:blur(12px);
+ position:relative;
+ overflow:hidden;
+ transition:transform 0.2s ease, box-shadow 0.2s ease;
+ transform-style:preserve-3d;
+}
+
+/* 3D hover */
+.card:hover{
+ box-shadow:0 0 40px rgba(255,79,163,0.5);
+}
+
+/* GLOW FOLLOW */
+.card::before{
+ content:"";
+ position:absolute;
+ inset:0;
+ border-radius:20px;
+ background:radial-gradient(circle at var(--x) var(--y),
+ rgba(255,79,163,0.4),
+ transparent 40%);
+ opacity:0;
+ transition:0.2s;
+}
+
+.card:hover::before{
+ opacity:1;
+}
+
+/* ANIMATED BORDER */
+.card::after{
+ content:"";
+ position:absolute;
+ inset:-2px;
+ border-radius:20px;
+ background:linear-gradient(45deg,#ff4fa3,#ff85c1,#a855f7,#ff4fa3);
+ background-size:300%;
+ animation:gradientMove 6s linear infinite;
+ z-index:-1;
+}
+
+@keyframes gradientMove{
+ 0%{background-position:0%}
+ 100%{background-position:300%}
+}
+
+/* CLICK BURST */
+.card.active{
+ transform:scale(1.08);
+ box-shadow:
+ 0 0 20px #ff4fa3,
+ 0 0 60px #ff4fa3;
+}
+
+/* TEXT */
+.card-title{font-size:18px;color:#ff85c1}
+.card-sub{font-size:13px;color:#ccc}
+
+/* RARITY */
+.card.god{box-shadow:0 0 60px #ff003c}
+.card.legendary{box-shadow:0 0 40px #a855f7}
+.card.rare{box-shadow:0 0 30px #3b82f6}
+.card.common{box-shadow:0 0 10px rgba(255,255,255,0.1)}
