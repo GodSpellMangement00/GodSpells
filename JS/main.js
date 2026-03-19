@@ -1,11 +1,11 @@
-// 🌸 GODSPELL FINAL JS
-
 document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================
      ⭐ STARS BACKGROUND
   ========================== */
-  for (let i = 0; i < 60; i++) {
+  const starCount = 60;
+
+  for (let i = 0; i < starCount; i++) {
     const star = document.createElement("div");
     star.className = "star";
 
@@ -19,7 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =========================
      🌸 SAKURA PETALS
   ========================== */
-  for (let i = 0; i < 25; i++) {
+  const petalCount = 25;
+
+  for (let i = 0; i < petalCount; i++) {
     const petal = document.createElement("div");
     petal.className = "petal";
 
@@ -30,22 +32,40 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(petal);
   }
 
+  /* =========================
+     🌸 SCROLL REVEAL (SMOOTH)
+  ========================== */
+  const sections = document.querySelectorAll(".section");
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+      }
+    });
+  }, {
+    threshold: 0.2
+  });
+
+  sections.forEach(section => observer.observe(section));
+
 });
 
 
 /* =========================
-   🔽 MENU TOGGLE SYSTEM
+   🔽 DROPDOWN MENU SYSTEM
 ========================= */
 function toggleMenu(){
-  const dropdown = document.getElementById("dropdown");
-  dropdown.classList.toggle("active");
+  const menu = document.getElementById("dropdown");
+  menu.classList.toggle("active");
 }
 
-// close when clicking outside
-document.addEventListener("click", (e) => {
-  if (!e.target.closest(".menu")) {
-    const dropdown = document.getElementById("dropdown");
-    if (dropdown) dropdown.classList.remove("active");
+/* CLOSE MENU ON OUTSIDE CLICK */
+document.addEventListener("click", (e)=>{
+  const dropdown = document.getElementById("dropdown");
+
+  if(!e.target.closest(".menu")){
+    if(dropdown) dropdown.classList.remove("active");
   }
 });
 
@@ -59,12 +79,12 @@ function joinDiscord(){
   window.open("https://discord.gg/YQVF7sy2gR", "_blank");
 }
 
-// Go to members page
+// Go to Members page
 function goMembers(){
   window.location.href = "profiles.html";
 }
 
-// Discord Login (basic OAuth)
+// Discord Login (optional)
 function loginDiscord(){
   window.location.href =
   "https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&response_type=token&scope=identify";
