@@ -13,13 +13,91 @@ html{scroll-behavior:smooth}
 
 /* 🌸 BACKGROUND */
 body{
- background:
- radial-gradient(circle at 20% 20%, rgba(255,79,163,0.15), transparent 40%),
- radial-gradient(circle at 80% 80%, rgba(255,79,163,0.1), transparent 40%),
- linear-gradient(135deg,#050507,#0d0d14);
+ background:linear-gradient(-45deg,#050507,#1a0d1f,#0d0d14,#1a1a2e);
+ background-size:400% 400%;
+ animation:bgMove 10s ease infinite;
  color:#fff;
- overflow-x:hidden;
- text-align:center;
+ overflow:hidden;
+}
+
+@keyframes bgMove{
+ 0%{background-position:0% 50%}
+ 50%{background-position:100% 50%}
+ 100%{background-position:0% 50%}
+}
+
+/* 🌸 NAVBAR */
+.nav{
+ position:fixed;
+ width:100%;
+ top:0;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:15px 25px;
+ backdrop-filter:blur(10px);
+ background:rgba(0,0,0,0.3);
+ z-index:100;
+}
+
+.logo{
+ font-size:22px;
+ font-weight:600;
+ color:#ff4fa3;
+}
+
+.nav-links a{
+ margin:0 10px;
+ color:#ccc;
+ text-decoration:none;
+ transition:0.3s;
+}
+
+.nav-links a:hover{color:#ff4fa3}
+
+/* 🌸 MENU */
+.menu{
+ position:relative;
+ font-size:22px;
+ cursor:pointer;
+}
+
+/* DROPDOWN */
+.dropdown{
+ position:absolute;
+ right:0;
+ top:35px;
+ background:rgba(0,0,0,0.7);
+ backdrop-filter:blur(10px);
+ border-radius:12px;
+ padding:10px;
+ min-width:160px;
+ display:flex;
+ flex-direction:column;
+
+ opacity:0;
+ transform:translateY(-10px);
+ pointer-events:none;
+ transition:0.3s;
+}
+
+.dropdown.active{
+ opacity:1;
+ transform:translateY(0);
+ pointer-events:auto;
+}
+
+.dropdown a{
+ color:#ccc;
+ text-decoration:none;
+ padding:10px;
+ border-radius:8px;
+ transition:0.3s;
+}
+
+.dropdown a:hover{
+ background:rgba(255,79,163,0.2);
+ color:#ff4fa3;
 }
 
 /* HERO */
@@ -29,188 +107,165 @@ body{
  flex-direction:column;
  justify-content:center;
  align-items:center;
+ text-align:center;
 }
 
 .hero img{
- width:130px;
+ width:140px;
+ border-radius:50%;
+ border:3px solid #ff4fa3;
+ box-shadow:0 0 40px #ff4fa3,0 0 80px #ff4fa3;
  margin-bottom:20px;
- filter:drop-shadow(0 0 25px #ff4fa3);
+ transition:0.4s;
 }
+
+.hero img:hover{transform:scale(1.1)}
 
 .hero h1{
  font-size:55px;
- background:linear-gradient(45deg,#ff4fa3,#ff85c1);
+ background:linear-gradient(45deg,#ff4fa3,#a855f7);
  -webkit-background-clip:text;
  color:transparent;
 }
 
-/* 🌸 SAKURA PETALS */
+.hero p{color:#ccc;margin:10px 0}
+
+/* BUTTONS */
+.btn{
+ padding:12px 25px;
+ border-radius:30px;
+ border:none;
+ cursor:pointer;
+ margin:5px;
+ transition:0.3s;
+}
+
+.primary{
+ background:linear-gradient(45deg,#ff4fa3,#a855f7);
+ color:white;
+}
+
+.secondary{
+ background:transparent;
+ border:1px solid #555;
+ color:#ccc;
+}
+
+.primary:hover{
+ box-shadow:0 0 20px #ff4fa3;
+ transform:scale(1.05);
+}
+
+.secondary:hover{
+ border-color:#ff4fa3;
+ color:#ff4fa3;
+ transform:scale(1.05);
+}
+
+/* STARS */
+.star{
+ position:absolute;
+ width:2px;
+ height:2px;
+ background:white;
+ opacity:0.6;
+}
+
+/* PETALS */
 .petal{
- position:fixed;
- width:10px;
- height:10px;
+ position:absolute;
+ width:8px;
+ height:8px;
  background:radial-gradient(circle,#ff4fa3,#ff85c1);
  border-radius:50%;
- opacity:0.7;
+ opacity:0.6;
  animation:fall linear infinite;
 }
 
 @keyframes fall{
- 0%{
-   transform:translateY(-10vh) translateX(0);
- }
- 100%{
-   transform:translateY(110vh) translateX(40px);
- }
-}
-
-/* SECTION */
-.section{
- padding:80px 20px;
- max-width:900px;
- margin:auto;
-}
-
-/* HEADINGS */
-h2{
- color:#ff85c1;
- margin-bottom:10px;
-}
-
-/* CARDS */
-.card{
- margin:20px auto;
- padding:20px;
- border-radius:20px;
- background:rgba(255,255,255,0.03);
- backdrop-filter:blur(10px);
- transition:0.3s;
- cursor:pointer;
-}
-
-/* HOVER */
-.card:hover{
- transform:scale(1.05);
- box-shadow:0 0 25px #ff4fa3;
-}
-
-/* CLICK */
-.card:active{
- transform:scale(1.08);
- box-shadow:0 0 50px #ff4fa3;
-}
-
-/* BUTTON */
-.btn{
- margin-top:20px;
- padding:10px 20px;
- border:none;
- border-radius:12px;
- background:linear-gradient(45deg,#ff4fa3,#ff85c1);
- color:#fff;
- cursor:pointer;
- transition:0.3s;
-}
-
-.btn:hover{
- transform:scale(1.1);
- box-shadow:0 0 20px #ff4fa3;
-}
-
-/* FOOTER */
-.footer{
- padding:40px;
- opacity:0.6;
+ 0%{transform:translateY(-10vh)}
+ 100%{transform:translateY(110vh)}
 }
 </style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
+<div class="nav">
+  <div class="logo">🌸 GodSpell</div>
+
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="profiles.html">Members</a>
+  </div>
+
+  <div class="menu" onclick="toggleMenu()">⋮
+    <div class="dropdown" id="dropdown">
+      <a href="#">Guidelines</a>
+      <a href="#">Terms</a>
+      <a onclick="loginDiscord()">Login</a>
+      <a onclick="joinDiscord()">Join Server</a>
+    </div>
+  </div>
+</div>
+
 <!-- HERO -->
 <section class="hero">
-<img src="pfp.gif">
-<h1>GodSpell</h1>
+  <img src="pfp.gif">
+  <h1>GodSpell</h1>
+  <p>Elite Clan • Builders • PvP • Grind Masters</p>
+
+  <div>
+    <button class="btn primary" onclick="goMembers()">🌸 Members</button>
+    <button class="btn secondary" onclick="joinDiscord()">💌 Join</button>
+  </div>
 </section>
-
-<!-- ABOUT -->
-<section class="section">
-<h2>What is GodSpell?</h2>
-<p>GodSpell is a high-level Minecraft clan focused on grinding, building, PvP and teamwork.</p>
-</section>
-
-<!-- TEAM -->
-<section class="section">
-<h2>Leadership</h2>
-
-<div class="card">Founder: SAM_DK1</div>
-<div class="card">Leader: PRASAD09</div>
-<div class="card">Co-Leader: arkinstan</div>
-<div class="card">Developer: TheGod2401</div>
-<div class="card">Officer: Walidwolly</div>
-
-</section>
-
-<!-- MEMBERS -->
-<section class="section">
-<h2>Members</h2>
-<p>Click to explore members</p>
-
-<a href="profiles.html">
-<button class="btn">View Members</button>
-</a>
-
-</section>
-
-<!-- JOIN -->
-<section class="section">
-<h2>Join Us</h2>
-<p>Wanna join us?</p>
-
-<button class="btn" onclick="joinDiscord()">
-Join Discord
-</button>
-
-</section>
-
-<!-- EXTRA -->
-<section class="section">
-<h2>Why Choose Us?</h2>
-<p>
-✔ Skilled Team<br>
-✔ Active Community<br>
-✔ Organized Tasks<br>
-✔ Competitive Gameplay
-</p>
-</section>
-
-<!-- GUIDELINES -->
-<section class="section">
-<h2>Guidelines</h2>
-<p>Respect • Stay active • Follow rules • Complete tasks</p>
-</section>
-
-<!-- TERMS -->
-<section class="section">
-<h2>Terms</h2>
-<p>Breaking rules may result in removal.</p>
-</section>
-
-<div class="footer">© GodSpell</div>
 
 <script>
-// 🌸 PETALS (FIXED SMOOTH)
+// ⭐ stars
+for(let i=0;i<60;i++){
+ let s=document.createElement("div");
+ s.className="star";
+ s.style.left=Math.random()*100+"vw";
+ s.style.top=Math.random()*100+"vh";
+ document.body.appendChild(s);
+}
+
+// 🌸 petals
 for(let i=0;i<25;i++){
- let p=document.createElement('div');
- p.className='petal';
- p.style.left=Math.random()*100+'vw';
- p.style.animationDuration=(6+Math.random()*6)+'s';
+ let p=document.createElement("div");
+ p.className="petal";
+ p.style.left=Math.random()*100+"vw";
+ p.style.animationDuration=(5+Math.random()*5)+"s";
  document.body.appendChild(p);
 }
 
-// 🔗 DISCORD JOIN
+// 🔽 MENU TOGGLE
+function toggleMenu(){
+ document.getElementById("dropdown").classList.toggle("active");
+}
+
+// CLOSE WHEN CLICK OUTSIDE
+document.addEventListener("click",(e)=>{
+ if(!e.target.closest(".menu")){
+   document.getElementById("dropdown").classList.remove("active");
+ }
+});
+
+// 🔗 BUTTONS
 function joinDiscord(){
  window.open("https://discord.gg/YQVF7sy2gR");
+}
+
+function goMembers(){
+ window.location.href="profiles.html";
+}
+
+function loginDiscord(){
+ window.location.href =
+ "https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&response_type=token&scope=identify";
 }
 </script>
 
