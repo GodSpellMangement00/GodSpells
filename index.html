@@ -11,10 +11,15 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
 html{scroll-behavior:smooth}
 
+/* 🌸 BACKGROUND */
 body{
- background:linear-gradient(135deg,#0d0d14,#1a1a2e);
+ background:
+ radial-gradient(circle at 20% 20%, rgba(255,79,163,0.15), transparent 40%),
+ radial-gradient(circle at 80% 80%, rgba(255,79,163,0.1), transparent 40%),
+ linear-gradient(135deg,#050507,#0d0d14);
  color:#fff;
  overflow-x:hidden;
+ text-align:center;
 }
 
 /* HERO */
@@ -24,36 +29,39 @@ body{
  flex-direction:column;
  justify-content:center;
  align-items:center;
- text-align:center;
- position:relative;
 }
 
 .hero img{
- width:120px;
+ width:130px;
  margin-bottom:20px;
- filter:drop-shadow(0 0 20px #ff4fa3);
+ filter:drop-shadow(0 0 25px #ff4fa3);
 }
 
 .hero h1{
- font-size:52px;
+ font-size:55px;
  background:linear-gradient(45deg,#ff4fa3,#ff85c1);
  -webkit-background-clip:text;
  color:transparent;
 }
 
-/* PETALS */
+/* 🌸 SAKURA PETALS */
 .petal{
- position:absolute;
- width:8px;height:8px;
- background:#ff4fa3;
+ position:fixed;
+ width:10px;
+ height:10px;
+ background:radial-gradient(circle,#ff4fa3,#ff85c1);
  border-radius:50%;
- opacity:.6;
+ opacity:0.7;
  animation:fall linear infinite;
 }
 
 @keyframes fall{
- 0%{transform:translateY(-10vh)}
- 100%{transform:translateY(110vh)}
+ 0%{
+   transform:translateY(-10vh) translateX(0);
+ }
+ 100%{
+   transform:translateY(110vh) translateX(40px);
+ }
 }
 
 /* SECTION */
@@ -61,25 +69,35 @@ body{
  padding:80px 20px;
  max-width:900px;
  margin:auto;
- text-align:center;
 }
 
-h2{color:#ff85c1;margin-bottom:10px}
+/* HEADINGS */
+h2{
+ color:#ff85c1;
+ margin-bottom:10px;
+}
 
-/* CARD */
+/* CARDS */
 .card{
  margin:20px auto;
  padding:20px;
- background:rgba(255,255,255,0.03);
  border-radius:20px;
- transition:.3s;
+ background:rgba(255,255,255,0.03);
+ backdrop-filter:blur(10px);
+ transition:0.3s;
  cursor:pointer;
 }
 
+/* HOVER */
 .card:hover{
  transform:scale(1.05);
- background:linear-gradient(#181820,#181820) padding-box,
- linear-gradient(45deg,#ff4fa3,#ff85c1) border-box;
+ box-shadow:0 0 25px #ff4fa3;
+}
+
+/* CLICK */
+.card:active{
+ transform:scale(1.08);
+ box-shadow:0 0 50px #ff4fa3;
 }
 
 /* BUTTON */
@@ -88,18 +106,21 @@ h2{color:#ff85c1;margin-bottom:10px}
  padding:10px 20px;
  border:none;
  border-radius:12px;
- background:#ff4fa3;
+ background:linear-gradient(45deg,#ff4fa3,#ff85c1);
  color:#fff;
  cursor:pointer;
- transition:.3s;
+ transition:0.3s;
 }
 
-.btn:hover{transform:scale(1.1)}
+.btn:hover{
+ transform:scale(1.1);
+ box-shadow:0 0 20px #ff4fa3;
+}
 
+/* FOOTER */
 .footer{
  padding:40px;
- text-align:center;
- opacity:.6;
+ opacity:0.6;
 }
 </style>
 </head>
@@ -133,22 +154,34 @@ h2{color:#ff85c1;margin-bottom:10px}
 <!-- MEMBERS -->
 <section class="section">
 <h2>Members</h2>
-<p>Click to view all members</p>
+<p>Click to explore members</p>
+
 <a href="profiles.html">
 <button class="btn">View Members</button>
 </a>
+
 </section>
 
 <!-- JOIN -->
 <section class="section">
 <h2>Join Us</h2>
-<button class="btn" onclick="joinDiscord()">Join Discord</button>
+<p>Wanna join us?</p>
+
+<button class="btn" onclick="joinDiscord()">
+Join Discord
+</button>
+
 </section>
 
 <!-- EXTRA -->
 <section class="section">
 <h2>Why Choose Us?</h2>
-<p>✔ Skilled team<br>✔ Active clan<br>✔ Organized tasks<br>✔ Competitive gameplay</p>
+<p>
+✔ Skilled Team<br>
+✔ Active Community<br>
+✔ Organized Tasks<br>
+✔ Competitive Gameplay
+</p>
 </section>
 
 <!-- GUIDELINES -->
@@ -166,18 +199,18 @@ h2{color:#ff85c1;margin-bottom:10px}
 <div class="footer">© GodSpell</div>
 
 <script>
-// petals
-for(let i=0;i<30;i++){
+// 🌸 PETALS (FIXED SMOOTH)
+for(let i=0;i<25;i++){
  let p=document.createElement('div');
  p.className='petal';
- p.style.left=Math.random()*100+'%';
- p.style.animationDuration=(5+Math.random()*5)+'s';
+ p.style.left=Math.random()*100+'vw';
+ p.style.animationDuration=(6+Math.random()*6)+'s';
  document.body.appendChild(p);
 }
 
-// join
+// 🔗 DISCORD JOIN
 function joinDiscord(){
- window.open("https://discord.gg/YOUR_LINK");
+ window.open("https://discord.gg/YQVF7sy2gR");
 }
 </script>
 
