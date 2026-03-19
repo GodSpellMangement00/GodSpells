@@ -3,32 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GodSpell Dashboard</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/themes.css">
-<script defer src="js/main.js"></script>
+<title>GodSpell</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+html{scroll-behavior:smooth}
+
+body{
+ background:linear-gradient(135deg,#0d0d14,#1a1a2e);
+ color:#fff;
+ overflow-x:hidden;
+}
+
+/* HERO */
+.hero{
+ height:100vh;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+ position:relative;
+}
+
+.hero img{
+ width:120px;
+ margin-bottom:20px;
+ filter:drop-shadow(0 0 20px #ff4fa3);
+}
+
+.hero h1{
+ font-size:52px;
+ background:linear-gradient(45deg,#ff4fa3,#ff85c1);
+ -webkit-background-clip:text;
+ color:transparent;
+}
+
+/* PETALS */
+.petal{
+ position:absolute;
+ width:8px;height:8px;
+ background:#ff4fa3;
+ border-radius:50%;
+ opacity:.6;
+ animation:fall linear infinite;
+}
+
+@keyframes fall{
+ 0%{transform:translateY(-10vh)}
+ 100%{transform:translateY(110vh)}
+}
+
+/* SECTION */
+.section{
+ padding:80px 20px;
+ max-width:900px;
+ margin:auto;
+ text-align:center;
+}
+
+h2{color:#ff85c1;margin-bottom:10px}
+
+/* CARD */
+.card{
+ margin:20px auto;
+ padding:20px;
+ background:rgba(255,255,255,0.03);
+ border-radius:20px;
+ transition:.3s;
+ cursor:pointer;
+}
+
+.card:hover{
+ transform:scale(1.05);
+ background:linear-gradient(#181820,#181820) padding-box,
+ linear-gradient(45deg,#ff4fa3,#ff85c1) border-box;
+}
+
+/* BUTTON */
+.btn{
+ margin-top:20px;
+ padding:10px 20px;
+ border:none;
+ border-radius:12px;
+ background:#ff4fa3;
+ color:#fff;
+ cursor:pointer;
+ transition:.3s;
+}
+
+.btn:hover{transform:scale(1.1)}
+
+.footer{
+ padding:40px;
+ text-align:center;
+ opacity:.6;
+}
+</style>
 </head>
-<body class="night">
 
-<header>
-  🌸 GodSpell
-  <div>
-    <button onclick="setTheme('night')">Night</button>
-    <button onclick="setTheme('aqua')">Aqua</button>
-    <button onclick="setTheme('sunset')">Sunset</button>
-  </div>
-  <nav>
-    <a href="profiles.html">Profiles</a>
-    <a href="pages/about.html">About</a>
-    <a href="pages/guidelines.html">Guidelines</a>
-    <a href="pages/terms.html">Terms</a>
-  </nav>
-</header>
+<body>
 
+<!-- HERO -->
 <section class="hero">
-  <h1>GodSpell Clan Dashboard</h1>
-  <p>Manage members, tasks & performance</p>
+<img src="pfp.gif">
+<h1>GodSpell</h1>
 </section>
+
+<!-- ABOUT -->
+<section class="section">
+<h2>What is GodSpell?</h2>
+<p>GodSpell is a high-level Minecraft clan focused on grinding, building, PvP and teamwork.</p>
+</section>
+
+<!-- TEAM -->
+<section class="section">
+<h2>Leadership</h2>
+
+<div class="card">Founder: SAM_DK1</div>
+<div class="card">Leader: PRASAD09</div>
+<div class="card">Co-Leader: arkinstan</div>
+<div class="card">Developer: TheGod2401</div>
+<div class="card">Officer: Walidwolly</div>
+
+</section>
+
+<!-- MEMBERS -->
+<section class="section">
+<h2>Members</h2>
+<p>Click to view all members</p>
+<a href="profiles.html">
+<button class="btn">View Members</button>
+</a>
+</section>
+
+<!-- JOIN -->
+<section class="section">
+<h2>Join Us</h2>
+<button class="btn" onclick="joinDiscord()">Join Discord</button>
+</section>
+
+<!-- EXTRA -->
+<section class="section">
+<h2>Why Choose Us?</h2>
+<p>✔ Skilled team<br>✔ Active clan<br>✔ Organized tasks<br>✔ Competitive gameplay</p>
+</section>
+
+<!-- GUIDELINES -->
+<section class="section">
+<h2>Guidelines</h2>
+<p>Respect • Stay active • Follow rules • Complete tasks</p>
+</section>
+
+<!-- TERMS -->
+<section class="section">
+<h2>Terms</h2>
+<p>Breaking rules may result in removal.</p>
+</section>
+
+<div class="footer">© GodSpell</div>
+
+<script>
+// petals
+for(let i=0;i<30;i++){
+ let p=document.createElement('div');
+ p.className='petal';
+ p.style.left=Math.random()*100+'%';
+ p.style.animationDuration=(5+Math.random()*5)+'s';
+ document.body.appendChild(p);
+}
+
+// join
+function joinDiscord(){
+ window.open("https://discord.gg/YOUR_LINK");
+}
+</script>
 
 </body>
 </html>
