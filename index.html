@@ -26,8 +26,31 @@ body{
  100%{background-position:0% 50%}
 }
 
+/* 🌸 NAV */
+.nav{
+ position:fixed;
+ top:0;
+ width:100%;
+ display:flex;
+ justify-content:center;
+ gap:15px;
+ padding:15px;
+ background:rgba(0,0,0,0.3);
+ backdrop-filter:blur(10px);
+ z-index:100;
+}
+
+.nav a{
+ color:#ccc;
+ text-decoration:none;
+ transition:0.3s;
+}
+
+.nav a:hover{color:#ff4fa3}
+
 /* 🌸 HERO */
 .hero{
+ position:relative;
  height:100vh;
  display:flex;
  flex-direction:column;
@@ -36,26 +59,45 @@ body{
  text-align:center;
 }
 
+.curve-line{
+ position:absolute;
+ top:100px;
+ width:80%;
+ height:150px;
+ border-top:3px solid #ff4fa3;
+ border-radius:50%;
+ box-shadow:0 0 30px #ff4fa3;
+}
+
 .hero img{
  width:200px;
  border-radius:50%;
  border:4px solid #ff4fa3;
- box-shadow:0 0 40px #ff4fa3,0 0 100px rgba(255,79,163,0.5);
- margin-bottom:20px;
+ box-shadow:0 0 40px #ff4fa3;
+ margin-top:40px;
 }
 
-/* 🌸 EMBEDS */
+.hero h1{
+ font-size:50px;
+ background:linear-gradient(45deg,#ff4fa3,#a855f7);
+ -webkit-background-clip:text;
+ color:transparent;
+}
+
+/* 🌸 SECTION */
 .section{
  display:flex;
  flex-direction:column;
  align-items:center;
  gap:25px;
  padding:80px 20px;
+ scroll-margin-top:100px;
 }
 
+/* 🌸 EMBED */
 .embed{
- max-width:700px;
  width:90%;
+ max-width:700px;
  padding:25px;
  background:rgba(255,255,255,0.05);
  backdrop-filter:blur(12px);
@@ -63,13 +105,6 @@ body{
  text-align:center;
  cursor:pointer;
  transition:0.3s;
- opacity:0;
- transform:translateY(40px);
-}
-
-.embed.show{
- opacity:1;
- transform:translateY(0);
 }
 
 .embed:hover{
@@ -79,46 +114,9 @@ body{
 
 .embed.active{
  transform:scale(1.08);
- box-shadow:0 0 50px #ff4fa3;
 }
 
-.embed h2{color:#ff85c1;margin-bottom:10px}
-.embed p{color:#ccc;line-height:1.6}
-
-/* 🌸 REAL PETAL SHAPE */
-.petal{
- position:fixed;
- top:-10vh; /* START FROM TOP */
- width:12px;
- height:18px;
- background:linear-gradient(45deg,#ff4fa3,#ff85c1);
- border-radius:60% 60% 60% 0;
- opacity:0.8;
- transform:rotate(45deg);
- animation:fall linear infinite;
- pointer-events:none;
-}
-
-/* FALL */
-@keyframes fall{
- 0%{
-  transform:translateY(-10vh) rotate(0deg);
- }
- 100%{
-  transform:translateY(110vh) rotate(360deg);
- }
-}
-
-/* 🌸 STARS */
-.star{
- position:fixed;
- width:2px;
- height:2px;
- background:white;
- opacity:0.6;
-}
-
-/* BUTTON */
+/* 🌸 BUTTON */
 .btn{
  padding:10px 20px;
  border-radius:20px;
@@ -128,52 +126,121 @@ body{
  cursor:pointer;
  margin-top:10px;
 }
+
+/* 🌸 MEMBER PREVIEW */
+.preview{
+ display:flex;
+ gap:20px;
+}
+
+.preview img{
+ width:100px;
+ border-radius:15px;
+}
+
+/* 🌸 PETALS */
+.petal{
+ position:fixed;
+ top:-10vh;
+ width:12px;
+ height:18px;
+ background:linear-gradient(45deg,#ff4fa3,#ff85c1);
+ border-radius:60% 60% 60% 0;
+ transform:rotate(45deg);
+ animation:fall linear infinite;
+}
+
+@keyframes fall{
+ 0%{transform:translateY(-10vh)}
+ 100%{transform:translateY(110vh)}
+}
+
+/* 🌸 STARS */
+.star{
+ position:fixed;
+ width:2px;
+ height:2px;
+ background:white;
+}
 </style>
 </head>
 
 <body>
 
+<!-- NAV -->
+<div class="nav">
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#services">Services</a>
+<a href="#members">Members</a>
+<a href="#contact">Contact</a>
+</div>
+
 <!-- HERO -->
-<section class="hero">
+<section id="home" class="hero">
+<div class="curve-line"></div>
 <img src="pfp.gif">
 <h1>GodSpell</h1>
-<button class="btn" onclick="goMembers()">View Members</button>
 </section>
 
-<!-- EMBEDS -->
-<section class="section">
-
+<!-- ABOUT -->
+<section id="about" class="section">
 <div class="embed" onclick="activate(this)">
-<h2>What is GodSpell?</h2>
-<p>GodSpell is a powerful Minecraft clan focused on teamwork, strategy, and domination.</p>
+<h2>About Us</h2>
+<p>
+GodSpell is a powerful Minecraft clan focused on teamwork, grinding, PvP, and building.
+We aim to dominate with strategy and coordination.
+Our members specialize in different skills and contribute to the clan’s strength.
+We focus on discipline, performance, and growth.
+</p>
 </div>
+</section>
 
+<!-- SERVICES -->
+<section id="services" class="section">
 <div class="embed" onclick="activate(this)">
-<h2>Mission</h2>
-<p>To build one of the strongest communities with skill and dedication.</p>
+<h2>Services</h2>
+<p>Server Management • Clan System • Strategy Planning • Task Assignment</p>
 </div>
+</section>
 
-<div class="embed" onclick="activate(this)">
-<h2>Leadership</h2>
-<p>Led by PRASAD09 with a strong team including SAM_DK1 and arkinstan.</p>
-</div>
-
-<div class="embed" onclick="activate(this)">
-<h2>Why Join?</h2>
-<p>✔ Active team ✔ Skilled players ✔ Organized system ✔ Growth</p>
-</div>
-
+<!-- MEMBERS -->
+<section id="members" class="section">
 <div class="embed" onclick="activate(this)">
 <h2>Members</h2>
-<button class="btn" onclick="goMembers()">Explore Members</button>
+
+<div class="preview">
+<img src="https://image.pollinations.ai/prompt/anime%20god%20pink&seed=1">
+<img src="https://image.pollinations.ai/prompt/anime%20boy%20pink&seed=2">
+<img src="https://image.pollinations.ai/prompt/anime%20assassin%20pink&seed=3">
 </div>
 
+<button class="btn" onclick="goMembers()">View Member List</button>
+
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+<div class="embed" onclick="activate(this)">
+<h2>Contact</h2>
+<button class="btn" onclick="joinDiscord()">Join Discord</button>
+</div>
 </section>
 
 <script>
 
-/* ⭐ STARS */
-for(let i=0;i<50;i++){
+/* PETALS */
+for(let i=0;i<25;i++){
+ let p=document.createElement("div");
+ p.className="petal";
+ p.style.left=Math.random()*100+"vw";
+ p.style.animationDuration=(5+Math.random()*5)+"s";
+ document.body.appendChild(p);
+}
+
+/* STARS */
+for(let i=0;i<40;i++){
  let s=document.createElement("div");
  s.className="star";
  s.style.left=Math.random()*100+"vw";
@@ -181,41 +248,19 @@ for(let i=0;i<50;i++){
  document.body.appendChild(s);
 }
 
-/* 🌸 FIXED PETALS */
-for(let i=0;i<25;i++){
- let p=document.createElement("div");
- p.className="petal";
-
- p.style.left=Math.random()*100+"vw";
-
- p.style.animationDuration=(6+Math.random()*6)+"s";
- p.style.animationDelay=Math.random()*5+"s";
-
- document.body.appendChild(p);
-}
-
-/* CLICK ANIMATION */
+/* CLICK EFFECT */
 function activate(el){
  el.classList.add("active");
  setTimeout(()=>el.classList.remove("active"),300);
 }
 
-/* SCROLL REVEAL */
-const embeds=document.querySelectorAll(".embed");
-
-const observer=new IntersectionObserver(entries=>{
- entries.forEach(e=>{
-  if(e.isIntersecting){
-    e.target.classList.add("show");
-  }
- });
-},{threshold:0.2});
-
-embeds.forEach(e=>observer.observe(e));
-
-/* BUTTON */
+/* BUTTONS */
 function goMembers(){
  window.location.href="profiles.html";
+}
+
+function joinDiscord(){
+ window.open("https://discord.gg/YQVF7sy2gR");
 }
 
 </script>
