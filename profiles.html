@@ -6,121 +6,226 @@
 <title>GodSpell Members</title>
 
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+/* LIST */
+.member-list{
+ margin-top:40px;
+ line-height:2.2;
+ font-size:16px;
+}
+
+.member{
+ cursor:pointer;
+ color:#ccc;
+ transition:0.3s;
+}
+
+.member:hover{
+ color:#ff4fa3;
+}
+
+/* MODAL */
+.modal{
+ position:fixed;
+ top:0;
+ left:0;
+ width:100%;
+ height:100%;
+ background:rgba(0,0,0,0.7);
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ opacity:0;
+ pointer-events:none;
+ transition:0.3s;
+}
+
+.modal.active{
+ opacity:1;
+ pointer-events:auto;
+}
+
+/* CARD */
+.modal-card{
+ background:rgba(20,20,30,0.9);
+ padding:20px;
+ border-radius:20px;
+ width:280px;
+ text-align:center;
+ transform:scale(0.8);
+ transition:0.3s;
+}
+
+.modal.active .modal-card{
+ transform:scale(1);
+}
+
+.modal-card img{
+ width:100%;
+ height:160px;
+ border-radius:15px;
+ object-fit:cover;
+}
+
+.close{
+ margin-top:10px;
+ cursor:pointer;
+ color:#ff4fa3;
+}
+</style>
+
 </head>
 
 <body>
 
-<!-- 🌸 NAVBAR -->
 <div class="nav">
-  <div class="logo">🌸 GodSpell</div>
+<div class="logo">🌸 GodSpell</div>
+</div>
 
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="#">About</a>
-    <a href="#">Members</a>
-  </div>
+<section class="section show">
 
-  <div class="menu" onclick="toggleMenu()">⋮
-    <div class="dropdown" id="dropdown">
-      <a href="index.html#about">About</a>
-      <a href="index.html#guidelines">Guidelines</a>
-      <a href="index.html#members">Members</a>
-      <a href="index.html#terms">Terms</a>
-      <a onclick="joinDiscord()">Join</a>
-    </div>
+<h2>Members</h2>
+
+<div class="member-list">
+
+<!-- CLICKABLE MEMBERS -->
+<div class="member" onclick="openCard('sam')">SAM_DK1 (Founder)</div>
+<div class="member" onclick="openCard('prasad')">PRASAD09 (Leader)</div>
+<div class="member" onclick="openCard('ark')">arkinstan (Co-Leader)</div>
+<div class="member" onclick="openCard('walid')">Walidwolly (Officer)</div>
+<div class="member" onclick="openCard('god')">TheGod2401 (Developer)</div>
+<div class="member" onclick="openCard('dead')">abinav_gamer</div>
+<div class="member" onclick="openCard('raptor')">laviathan_playz</div>
+<div class="member" onclick="openCard('blade')">BladeOnChoppa</div>
+<div class="member" onclick="openCard('mohamed')">not_mohamed__</div>
+<div class="member" onclick="openCard('bar')">BarGaming_</div>
+<div class="member" onclick="openCard('axe')">AxeArm</div>
+<div class="member" onclick="openCard('spectro')">sir_spectro</div>
+
+<!-- NORMAL MEMBERS -->
+<div class="member">elzoghby9637</div>
+<div class="member">aniagent4096</div>
+<div class="member">12_nexus_12</div>
+<div class="member">darko_711</div>
+<div class="member">ahmedibrahm_</div>
+<div class="member">yasin_ibrahim</div>
+<div class="member">cottonclouddd</div>
+<div class="member">johnunder531946</div>
+<div class="member">lettuce07344</div>
+<div class="member">king_sg45_32195</div>
+<div class="member">itzmoon_1947</div>
+<div class="member">ivken1</div>
+<div class="member">eliaamorii3</div>
+<div class="member">w_spectro_</div>
+<div class="member">dedinlife</div>
+<div class="member">pro_raptor</div>
+<div class="member">sumersparow</div>
+<div class="member">b..l..a..d..e</div>
+<div class="member">replayez</div>
+<div class="member">ifwritu</div>
+
+</div>
+</section>
+
+<!-- 🌸 MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-card" id="card">
+    <!-- dynamic -->
   </div>
 </div>
 
-<!-- 🌸 PAGE TITLE -->
-<section class="section show">
-  <h2>GodSpell Members</h2>
+<script>
+// 🌸 DATA
+const data = {
+ sam:{
+  img:"https://image.pollinations.ai/prompt/aesthetic%20anime%20boy%20pink&seed=1",
+  name:"SAM_DK1",
+  info:"Founder • Trader • Grinder • Builder"
+ },
+ prasad:{
+  img:"https://image.pollinations.ai/prompt/anime%20god%20warrior%20pink&seed=2",
+  name:"PRASAD09",
+  info:"Leader • Grinder • Builder"
+ },
+ ark:{
+  img:"https://image.pollinations.ai/prompt/shadow%20assassin%20pink&seed=3",
+  name:"arkinstan",
+  info:"PvP • Builder • Trading"
+ },
+ walid:{
+  img:"https://image.pollinations.ai/prompt/anime%20farmer%20pink&seed=4",
+  name:"Walidwolly",
+  info:"Building • Farming • Grinding"
+ },
+ god:{
+  img:"https://image.pollinations.ai/prompt/divine%20builder%20pink&seed=5",
+  name:"TheGod2401",
+  info:"Developer • Builder • Grinder"
+ },
+ dead:{
+  img:"https://image.pollinations.ai/prompt/anime%20engineer%20pink&seed=6",
+  name:"abinav_gamer",
+  info:"Redstone • Developer • Builder"
+ },
+ raptor:{
+  img:"https://image.pollinations.ai/prompt/anime%20raptor%20warrior%20pink&seed=7",
+  name:"laviathan_playz",
+  info:"PvP • Builder • Grinder"
+ },
+ blade:{
+  img:"https://image.pollinations.ai/prompt/anime%20blade%20fighter%20pink&seed=8",
+  name:"BladeOnChoppa",
+  info:"Builder • Grinder"
+ },
+ mohamed:{
+  img:"https://image.pollinations.ai/prompt/anime%20strategist%20pink&seed=9",
+  name:"not_mohamed__",
+  info:"Manager • Builder • Redstone"
+ },
+ bar:{
+  img:"https://image.pollinations.ai/prompt/anime%20farm%20builder%20pink&seed=10",
+  name:"BarGaming_",
+  info:"Builder • Farming"
+ },
+ axe:{
+  img:"https://image.pollinations.ai/prompt/anime%20axe%20warrior%20pink&seed=11",
+  name:"AxeArm",
+  info:"Farm Builder • Grinder"
+ },
+ spectro:{
+  img:"https://image.pollinations.ai/prompt/anime%20ghost%20pink&seed=12",
+  name:"sir_spectro",
+  info:"Builder • Grinder"
+ }
+};
 
-  <!-- 🔍 SEARCH -->
-  <div class="search-box">
-    <input type="text" placeholder="Search members, skills, roles...">
-  </div>
+// OPEN CARD
+function openCard(id){
+ const p = data[id];
+ const modal = document.getElementById("modal");
+ const card = document.getElementById("card");
 
-  <!-- 🌸 MEMBER GRID -->
-  <div id="cards">
+ card.innerHTML = `
+   <img src="${p.img}">
+   <h3>${p.name}</h3>
+   <p>${p.info}</p>
+   <div class="close" onclick="closeCard()">Close</div>
+ `;
 
-    <!-- CARD 1 -->
-    <div class="card">
-      <img src="https://image.pollinations.ai/prompt/anime%20god%20warrior%20pink&seed=1">
-      <div class="card-content">
-        <div class="card-title">PRASAD09</div>
-        <div class="card-sub">Leader • Builder • Grinder</div>
-      </div>
-    </div>
+ modal.classList.add("active");
+}
 
-    <!-- CARD 2 -->
-    <div class="card">
-      <img src="https://image.pollinations.ai/prompt/aesthetic%20anime%20boy%20pink&seed=2">
-      <div class="card-content">
-        <div class="card-title">SAM_DK1</div>
-        <div class="card-sub">Founder • Trader • Builder</div>
-      </div>
-    </div>
+// CLOSE
+function closeCard(){
+ document.getElementById("modal").classList.remove("active");
+}
 
-    <!-- CARD 3 -->
-    <div class="card">
-      <img src="https://image.pollinations.ai/prompt/shadow%20assassin%20anime%20pink&seed=3">
-      <div class="card-content">
-        <div class="card-title">arkinstan</div>
-        <div class="card-sub">Co-Leader • PvP • Builder</div>
-      </div>
-    </div>
-
-    <!-- CARD 4 -->
-    <div class="card">
-      <img src="https://image.pollinations.ai/prompt/anime%20farmer%20pink&seed=4">
-      <div class="card-content">
-        <div class="card-title">Walidwolly</div>
-        <div class="card-sub">Officer • Farming • Grinding</div>
-      </div>
-    </div>
-
-    <!-- CARD 5 -->
-    <div class="card">
-      <img src="https://image.pollinations.ai/prompt/divine%20builder%20anime%20pink&seed=5">
-      <div class="card-content">
-        <div class="card-title">TheGod2401</div>
-        <div class="card-sub">Developer • Builder • Grinder</div>
-      </div>
-    </div>
-
-    <!-- CARD 6 -->
-    <div class="card">
-      <img src="https://image.pollinations.ai/prompt/anime%20engineer%20builder%20pink&seed=6">
-      <div class="card-content">
-        <div class="card-title">abinav_gamer</div>
-        <div class="card-sub">Builder • Redstoner • Developer</div>
-      </div>
-    </div>
-
-    <!-- CARD 7 -->
-    <div class="card">
-      <img src="https://image.pollinations.ai/prompt/anime%20raptor%20warrior%20pink&seed=7">
-      <div class="card-content">
-        <div class="card-title">laviathan_playz</div>
-        <div class="card-sub">PvP • Builder • Grinder</div>
-      </div>
-    </div>
-
-    <!-- CARD 8 -->
-    <div class="card">
-      <img src="https://image.pollinations.ai/prompt/anime%20blade%20fighter%20pink&seed=8">
-      <div class="card-content">
-        <div class="card-title">BladeOnChoppa</div>
-        <div class="card-sub">Builder • Grinder</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- 🌸 SCRIPTS -->
-<script src="main.js"></script>
+// CLICK OUTSIDE
+document.getElementById("modal").onclick = (e)=>{
+ if(e.target.id==="modal") closeCard();
+};
+</script>
 
 </body>
 </html>
