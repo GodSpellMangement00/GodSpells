@@ -26,64 +26,7 @@ body{
  100%{background-position:0% 50%}
 }
 
-/* 🌸 SCROLL BAR */
-.progress{
- position:fixed;
- top:0;
- left:0;
- height:3px;
- background:#ff4fa3;
- width:0%;
- z-index:200;
-}
-
-/* 🌸 NAV */
-.nav{
- position:fixed;
- width:100%;
- top:0;
- display:flex;
- justify-content:space-between;
- align-items:center;
- padding:15px 25px;
- backdrop-filter:blur(10px);
- background:rgba(0,0,0,0.3);
- z-index:100;
-}
-
-.logo{color:#ff4fa3;font-size:20px}
-
-.nav-links a{
- margin:0 10px;
- color:#ccc;
- text-decoration:none;
- transition:0.3s;
-}
-
-.nav-links a.active{
- color:#ff4fa3;
-}
-
-/* MENU */
-.menu{cursor:pointer}
-.dropdown{
- position:absolute;
- right:10px;
- top:50px;
- background:rgba(0,0,0,0.8);
- padding:10px;
- border-radius:10px;
- display:none;
- flex-direction:column;
-}
-.dropdown a{
- padding:8px;
- color:#ccc;
-}
-.dropdown a:hover{color:#ff4fa3}
-.dropdown.active{display:flex}
-
-/* HERO */
+/* 🌸 HERO */
 .hero{
  height:100vh;
  display:flex;
@@ -94,129 +37,143 @@ body{
 }
 
 .hero img{
- width:130px;
+ width:200px;
  border-radius:50%;
- box-shadow:0 0 40px #ff4fa3;
+ border:4px solid #ff4fa3;
+ box-shadow:0 0 40px #ff4fa3,0 0 100px rgba(255,79,163,0.5);
+ margin-bottom:20px;
 }
 
-.hero h1{
- font-size:55px;
- background:linear-gradient(45deg,#ff4fa3,#a855f7);
- -webkit-background-clip:text;
- color:transparent;
-}
-
-/* SECTION */
+/* 🌸 EMBEDS */
 .section{
- padding:100px 20px;
- max-width:900px;
- margin:auto;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ gap:25px;
+ padding:80px 20px;
+}
 
+.embed{
+ max-width:700px;
+ width:90%;
+ padding:25px;
+ background:rgba(255,255,255,0.05);
+ backdrop-filter:blur(12px);
+ border-radius:20px;
+ text-align:center;
+ cursor:pointer;
+ transition:0.3s;
  opacity:0;
  transform:translateY(40px);
- transition:0.8s;
-
- scroll-margin-top:80px;
 }
 
-.section.show{
+.embed.show{
  opacity:1;
  transform:translateY(0);
 }
 
-.section.active{
- box-shadow:0 0 40px rgba(255,79,163,0.3);
- border-radius:20px;
+.embed:hover{
+ transform:scale(1.03);
+ box-shadow:0 0 25px #ff4fa3;
+}
+
+.embed.active{
+ transform:scale(1.08);
+ box-shadow:0 0 50px #ff4fa3;
+}
+
+.embed h2{color:#ff85c1;margin-bottom:10px}
+.embed p{color:#ccc;line-height:1.6}
+
+/* 🌸 REAL PETAL SHAPE */
+.petal{
+ position:fixed;
+ top:-10vh; /* START FROM TOP */
+ width:12px;
+ height:18px;
+ background:linear-gradient(45deg,#ff4fa3,#ff85c1);
+ border-radius:60% 60% 60% 0;
+ opacity:0.8;
+ transform:rotate(45deg);
+ animation:fall linear infinite;
+ pointer-events:none;
+}
+
+/* FALL */
+@keyframes fall{
+ 0%{
+  transform:translateY(-10vh) rotate(0deg);
+ }
+ 100%{
+  transform:translateY(110vh) rotate(360deg);
+ }
+}
+
+/* 🌸 STARS */
+.star{
+ position:fixed;
+ width:2px;
+ height:2px;
+ background:white;
+ opacity:0.6;
 }
 
 /* BUTTON */
 .btn{
  padding:10px 20px;
  border-radius:20px;
- background:#ff4fa3;
  border:none;
+ background:#ff4fa3;
  color:#fff;
  cursor:pointer;
-}
-
-/* STARS */
-.star{
- position:absolute;
- width:2px;
- height:2px;
- background:white;
-}
-
-/* PETALS */
-.petal{
- position:absolute;
- width:8px;
- height:8px;
- background:#ff4fa3;
- border-radius:50%;
- animation:fall linear infinite;
-}
-@keyframes fall{
- 0%{transform:translateY(-10vh)}
- 100%{transform:translateY(110vh)}
+ margin-top:10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="progress" id="progress"></div>
-
-<div class="nav">
- <div class="logo">🌸 GodSpell</div>
-
- <div class="nav-links">
-  <a href="#about">About</a>
-  <a href="#guidelines">Guidelines</a>
-  <a href="#members">Members</a>
-  <a href="#terms">Terms</a>
- </div>
-
- <div class="menu" onclick="toggleMenu()">⋮
-  <div class="dropdown" id="dropdown">
-    <a href="#about">About</a>
-    <a href="#guidelines">Guidelines</a>
-    <a href="#members">Members</a>
-    <a href="#terms">Terms</a>
-    <a onclick="joinDiscord()">Join</a>
-  </div>
- </div>
-</div>
-
 <!-- HERO -->
 <section class="hero">
 <img src="pfp.gif">
 <h1>GodSpell</h1>
-</section>
-
-<section id="about" class="section">
-<h2>About Us</h2>
-<p>GodSpell is a high-level Minecraft clan focused on teamwork and dominance.</p>
-</section>
-
-<section id="guidelines" class="section">
-<h2>Guidelines</h2>
-<p>Respect • Stay active • Follow rules</p>
-</section>
-
-<section id="members" class="section">
-<h2>Members</h2>
 <button class="btn" onclick="goMembers()">View Members</button>
 </section>
 
-<section id="terms" class="section">
-<h2>Terms</h2>
-<p>Breaking rules may result in removal.</p>
+<!-- EMBEDS -->
+<section class="section">
+
+<div class="embed" onclick="activate(this)">
+<h2>What is GodSpell?</h2>
+<p>GodSpell is a powerful Minecraft clan focused on teamwork, strategy, and domination.</p>
+</div>
+
+<div class="embed" onclick="activate(this)">
+<h2>Mission</h2>
+<p>To build one of the strongest communities with skill and dedication.</p>
+</div>
+
+<div class="embed" onclick="activate(this)">
+<h2>Leadership</h2>
+<p>Led by PRASAD09 with a strong team including SAM_DK1 and arkinstan.</p>
+</div>
+
+<div class="embed" onclick="activate(this)">
+<h2>Why Join?</h2>
+<p>✔ Active team ✔ Skilled players ✔ Organized system ✔ Growth</p>
+</div>
+
+<div class="embed" onclick="activate(this)">
+<h2>Members</h2>
+<button class="btn" onclick="goMembers()">Explore Members</button>
+</div>
+
 </section>
 
 <script>
-// ⭐ stars
-for(let i=0;i<60;i++){
+
+/* ⭐ STARS */
+for(let i=0;i<50;i++){
  let s=document.createElement("div");
  s.className="star";
  s.style.left=Math.random()*100+"vw";
@@ -224,63 +181,43 @@ for(let i=0;i<60;i++){
  document.body.appendChild(s);
 }
 
-// 🌸 petals
+/* 🌸 FIXED PETALS */
 for(let i=0;i<25;i++){
  let p=document.createElement("div");
  p.className="petal";
+
  p.style.left=Math.random()*100+"vw";
- p.style.animationDuration=(5+Math.random()*5)+"s";
+
+ p.style.animationDuration=(6+Math.random()*6)+"s";
+ p.style.animationDelay=Math.random()*5+"s";
+
  document.body.appendChild(p);
 }
 
-// MENU
-function toggleMenu(){
- document.getElementById("dropdown").classList.toggle("active");
+/* CLICK ANIMATION */
+function activate(el){
+ el.classList.add("active");
+ setTimeout(()=>el.classList.remove("active"),300);
 }
 
-// SCROLL PROGRESS
-window.onscroll=()=>{
- let winScroll=document.documentElement.scrollTop;
- let height=document.documentElement.scrollHeight - document.documentElement.clientHeight;
- document.getElementById("progress").style.width=(winScroll/height)*100+"%";
-}
+/* SCROLL REVEAL */
+const embeds=document.querySelectorAll(".embed");
 
-// SCROLL REVEAL + ACTIVE
-const sections=document.querySelectorAll(".section");
-window.addEventListener("scroll",()=>{
- sections.forEach(sec=>{
-  const top=sec.getBoundingClientRect().top;
-
-  if(top<window.innerHeight-100){
-    sec.classList.add("show");
-  }
-
-  // active highlight
-  if(top<200 && top>-200){
-    sec.classList.add("active");
-  }else{
-    sec.classList.remove("active");
+const observer=new IntersectionObserver(entries=>{
+ entries.forEach(e=>{
+  if(e.isIntersecting){
+    e.target.classList.add("show");
   }
  });
-});
+},{threshold:0.2});
 
-// SMOOTH NAV CLICK
-document.querySelectorAll('a[href^="#"]').forEach(link=>{
- link.onclick=function(e){
-  e.preventDefault();
-  document.querySelector(this.getAttribute("href"))
-  .scrollIntoView({behavior:"smooth"});
- }
-});
+embeds.forEach(e=>observer.observe(e));
 
-// BUTTONS
+/* BUTTON */
 function goMembers(){
  window.location.href="profiles.html";
 }
 
-function joinDiscord(){
- window.open("https://discord.gg/YQVF7sy2gR");
-}
 </script>
 
 </body>
