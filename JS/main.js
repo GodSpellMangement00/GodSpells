@@ -3,11 +3,11 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================
-     ⭐ STARS (OPTIMIZED)
+     ⭐ STARS BACKGROUND
   ========================== */
   const starFrag = document.createDocumentFragment();
 
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 40; i++) {
     const star = document.createElement("div");
     star.className = "star";
 
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     petal.style.left = Math.random() * 100 + "vw";
     petal.style.animationDuration = (6 + Math.random() * 6) + "s";
     petal.style.animationDelay = Math.random() * 5 + "s";
+    petal.style.opacity = 0.5 + Math.random() * 0.5;
 
     petalFrag.appendChild(petal);
   }
@@ -41,9 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =========================
-     🌸 EMBED SCROLL REVEAL
+     🌸 SCROLL REVEAL
   ========================== */
-  const embeds = document.querySelectorAll(".embed, .section");
+  const embeds = document.querySelectorAll(".embed");
 
   const observer = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
@@ -55,30 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   embeds.forEach(el => observer.observe(el));
 
-
-  /* =========================
-     🔍 SEARCH FILTER
-  ========================== */
-  const search = document.querySelector(".search-box input");
-
-  if(search){
-    search.addEventListener("input", ()=>{
-      const value = search.value.toLowerCase();
-
-      const cards = document.querySelectorAll(".member-card, .member");
-
-      cards.forEach(card=>{
-        const text = card.innerText.toLowerCase();
-
-        if(text.includes(value)){
-          card.style.display = "";
-        }else{
-          card.style.display = "none";
-        }
-      });
-    });
-  }
-
 });
 
 
@@ -87,30 +64,18 @@ document.addEventListener("DOMContentLoaded", () => {
 ========================= */
 function activate(el){
   el.classList.add("active");
-  setTimeout(()=>el.classList.remove("active"), 300);
+
+  setTimeout(()=>{
+    el.classList.remove("active");
+  }, 300);
 }
 
 
 /* =========================
-   🔽 MENU SYSTEM
-========================= */
-function toggleMenu(){
-  document.getElementById("dropdown").classList.toggle("active");
-}
-
-document.addEventListener("click",(e)=>{
-  if(!e.target.closest(".menu")){
-    const dropdown = document.getElementById("dropdown");
-    if(dropdown) dropdown.classList.remove("active");
-  }
-});
-
-
-/* =========================
-   🔗 NAV + BUTTONS
+   🔗 BUTTON FUNCTIONS
 ========================= */
 
-// Go members page
+// Go to members page
 function goMembers(){
   window.location.href = "profiles.html";
 }
@@ -118,28 +83,4 @@ function goMembers(){
 // Join Discord
 function joinDiscord(){
   window.open("https://discord.gg/YQVF7sy2gR","_blank");
-}
-
-// Discord login
-function loginDiscord(){
-  window.location.href =
-  "https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&response_type=token&scope=identify";
-}
-
-
-/* =========================
-   📩 CONTACT (WEB → DISCORD)
-========================= */
-function contact(name,id){
-  fetch("https://discord.com/api/webhooks/1484160174037012603/eMLvuUDs-xrVPNDqOA72-ELv1eP8jxSs9uJsIecrIjwASv2isOG82_pHLctXDnFpZT6o",{
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json"
-    },
-    body: JSON.stringify({
-      content:`📩 Contact request for **${name}** (ID: ${id})`
-    })
-  });
-
-  alert("Request sent to Discord ✅");
 }
